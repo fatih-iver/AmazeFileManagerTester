@@ -1,6 +1,16 @@
 package fun.fiver;
 
+import io.appium.java_client.android.AndroidDriver;
 import org.graphwalker.core.machine.ExecutionContext;
+import org.graphwalker.java.annotation.AfterExecution;
+import org.graphwalker.java.annotation.BeforeExecution;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.remote.DesiredCapabilities;
+
+import java.io.File;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Implements the GraphWalker model: src/main/resources/SmallTest.json
@@ -10,6 +20,8 @@ import org.graphwalker.core.machine.ExecutionContext;
  * also: mvn compile
  */
 public class SomeSmallTest extends ExecutionContext implements SmallTest {
+
+  private AndroidDriver<WebElement> driver;
 
   @Override
   public void e_FirstAction() {
@@ -44,5 +56,29 @@ public class SomeSmallTest extends ExecutionContext implements SmallTest {
   @Override
   public void v_NewVertex() {
     System.out.println("Running: v_NewVertex");
+  }
+
+  @BeforeExecution
+  public void setup() {
+    File classpathRoot = new File(System.getProperty("user.dir"));
+    File appDir = new File(classpathRoot, "src/main/resources");
+    File app = new File(appDir, "amaze-file-manager-3-4-3.apk");
+    DesiredCapabilities capabilities = new DesiredCapabilities();
+    capabilities.setCapability("deviceName", "Android Emulator");
+    capabilities.setCapability("platformVersion", "9");
+    capabilities.setCapability("app", app.getAbsolutePath());
+    capabilities.setCapability("appPackage", "com.amaze.filemanager");
+    capabilities.setCapability("appActivity", ".activities.MainActivity");
+    try {
+      driver = new AndroidDriver<>(new URL("http://127.0.0.1:4723/wd/hub"), capabilities);
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+    }
+    driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+  }
+
+  @AfterExecution
+  public void tearDown() {
+    driver.quit();
   }
 }

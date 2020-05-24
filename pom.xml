@@ -62,6 +62,17 @@
       <artifactId>graphwalker-maven-plugin</artifactId>
       <version>${graphwalker.version}</version>
     </dependency>
+    <dependency>
+      <groupId>io.appium</groupId>
+      <artifactId>java-client</artifactId>
+      <version>7.3.0</version>
+    </dependency>
+    <dependency>
+      <groupId>com.google.guava</groupId>
+      <artifactId>guava</artifactId>
+      <version>23.0</version>
+    </dependency>
+
   </dependencies>
 
   <build>
