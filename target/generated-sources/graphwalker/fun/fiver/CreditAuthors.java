@@ -8,12 +8,33 @@ import org.graphwalker.java.annotation.Edge;
 @Model(file = "fun/fiver/CreditAuthors.json")
 public interface CreditAuthors {
 
+    @Vertex()
+    void v_Home();
+
+    @Vertex()
+    void v_Settings();
+
+    @Vertex()
+    void v_NavigationDrawer();
+
     @Edge()
-    void e_ActionGrantPermission();
+    void e_OpenAbout();
+
+    @Edge()
+    void e_GrantPermission();
+
+    @Vertex()
+    void v_About();
+
+    @Edge()
+    void e_OpenSettings();
+
+    @Edge()
+    void e_OpenNavigationDrawer();
 
     @Vertex()
     void v_StartState();
 
-    @Vertex()
-    void v_HomeState();
+    @Edge()
+    void e_CheckAuthors();
 }
