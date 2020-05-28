@@ -97,11 +97,11 @@ public class CreateFolderTest extends AmazeFileManagerContext implements CreateF
 
         List<WebElement> candidateElements = recyclerView.findElements(By.className("android.widget.RelativeLayout"));
 
-        for(WebElement candidateElement: candidateElements) {
+        for (WebElement candidateElement : candidateElements) {
 
             List<WebElement> subCandidateElements = candidateElement.findElements(By.className("android.widget.RelativeLayout"));
 
-            if(subCandidateElements.size() != 2){
+            if (subCandidateElements.size() != 2) {
                 continue;
             }
 
@@ -109,7 +109,7 @@ public class CreateFolderTest extends AmazeFileManagerContext implements CreateF
 
             WebElement textView = subCandidateElement.findElement(By.className("android.widget.TextView"));
 
-            if(textView.getText().equals(folderName)) {
+            if (textView.getText().equals(folderName)) {
                 isFolderFound = true;
                 //targetElement = candidateElement.findElement(By.className("android.widget.ImageButton"));
                 break;
